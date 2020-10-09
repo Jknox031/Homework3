@@ -1,18 +1,35 @@
-function generate() {
-  // set password length/complexity
-  let complexity = document.getElementById("CharacterAmountNumber").value;
-  //possible password values
-  let values = "abcdefghijklmnopqrstuvwxyz1234567890!@#$%^&*()_+-=";
+const characterAmountRange = document.getElementById
+("characterAmountRange")
+const characterAmountNumber = document.getElementById
+("characterAmountNumber")
+const includeUppercaseElement = document.getElementById
+("includeUppercase")
+const includeNumbersElement = document.getElementById
+("includeNumbers")
+const includeSymbolsElement = document.getElementById
+("includeSymbols")
+const form = document.getElementById("passwordGeneratorForm")
 
-  let password = "";
 
-  //creat for loop for password characters
-  for (var i = 0; i <= complexity; i++) {
-    password =
-      password +
-      values.charAt(math.floor(math.random() * math.floor(values.length - 1)));
-  }
+characterAmountNumber.addEventListener("input", syncCharacterAmount)
+characterAmountRange.addEventListener("input", syncCharacterAmount)
 
-  //add password to display area
-  document.getElementById("Generated Password").value = password;
+form.addEventListener("submit", e => {
+  e.preventDefault()
+  const characterAmount = characterAmountNumber.value
+  const includeUppercase = includeUppercaseElement.checked
+  const includeNumbers = includeNumbersElement.checked
+  const includeSymbols = includeSymbolsElement.checked
+  const password = generatePassword(characterAmount, includeUppercase, includeNumbers, includeSymbols)
+})
+
+function syncCharacterAmount(e) {
+  const value = e.target.value
+  characterAmountNumber.value = value
+  characterAmountRange.value = value
 }
+
+
+
+
+
